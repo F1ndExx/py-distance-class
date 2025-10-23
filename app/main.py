@@ -7,7 +7,7 @@ class Distance:
     def __init__(self, km: Number) -> None:
         if not isinstance(km, (int, float)):
             raise TypeError("Distance must be a number")
-        self.km: float = float(km)
+        self.km: Number = km  # зберігаємо як int або float
 
     def __str__(self) -> str:
         return f"Distance: {self.km} kilometers.\n"
@@ -22,7 +22,7 @@ class Distance:
         if isinstance(value, Distance):
             return value.km
         if isinstance(value, (int, float)):
-            return float(value)
+            return value
         return NotImplemented
 
     def __add__(
@@ -69,6 +69,7 @@ class Distance:
         if isinstance(other, (int, float)):
             if other == 0:
                 raise ZeroDivisionError("division by zero")
+            # округлюємо до 2 знаків
             return Distance(round(self.km / other, 2))
         if isinstance(other, Distance):
             raise TypeError(
