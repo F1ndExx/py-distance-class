@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Union
 
 Number = Union[int, float]
@@ -17,7 +18,7 @@ class Distance:
 
     @staticmethod
     def _get_km(
-        value: Union["Distance", Number]
+        value: Union[Distance, Number]
     ) -> Union[float, type(NotImplemented)]:
         if isinstance(value, Distance):
             return value.km
@@ -26,21 +27,21 @@ class Distance:
         return NotImplemented
 
     def __add__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+        self, other: Union[Distance, Number]
+    ) -> Union[Distance, type(NotImplemented)]:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return Distance(self.km + km)
 
     def __radd__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+        self, other: Union[Distance, Number]
+    ) -> Union[Distance, type(NotImplemented)]:
         return self + other
 
     def __iadd__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+        self, other: Union[Distance, Number]
+    ) -> Union[Distance, type(NotImplemented)]:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
@@ -49,7 +50,7 @@ class Distance:
 
     def __mul__(
         self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    ) -> Union[Distance, type(NotImplemented)]:
         if isinstance(other, (int, float)):
             return Distance(self.km * other)
         if isinstance(other, Distance):
@@ -60,12 +61,12 @@ class Distance:
 
     def __rmul__(
         self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    ) -> Union[Distance, type(NotImplemented)]:
         return self * other
 
     def __truediv__(
         self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    ) -> Union[Distance, type(NotImplemented)]:
         if isinstance(other, (int, float)):
             if other == 0:
                 raise ZeroDivisionError("division by zero")
@@ -82,7 +83,7 @@ class Distance:
         return NotImplemented
 
     def __eq__(
-        self, other: Union["Distance", Number]
+        self, other: Union[Distance, Number]
     ) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
@@ -90,7 +91,7 @@ class Distance:
         return self.km == km
 
     def __lt__(
-        self, other: Union["Distance", Number]
+        self, other: Union[Distance, Number]
     ) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
@@ -98,7 +99,7 @@ class Distance:
         return self.km < km
 
     def __le__(
-        self, other: Union["Distance", Number]
+        self, other: Union[Distance, Number]
     ) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
@@ -106,7 +107,7 @@ class Distance:
         return self.km <= km
 
     def __gt__(
-        self, other: Union["Distance", Number]
+        self, other: Union[Distance, Number]
     ) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
@@ -114,7 +115,7 @@ class Distance:
         return self.km > km
 
     def __ge__(
-        self, other: Union["Distance", Number]
+        self, other: Union[Distance, Number]
     ) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
