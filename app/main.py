@@ -53,10 +53,14 @@ class Distance:
         if isinstance(other, (int, float)):
             return Distance(self.km * other)
         if isinstance(other, Distance):
-            raise TypeError("Multiplication by Distance is not supported")
+            raise TypeError(
+                "Multiplication by Distance is not supported"
+            )
         return NotImplemented
 
-    def __rmul__(self, other: Number) -> Union["Distance", type(NotImplemented)]:
+    def __rmul__(
+        self, other: Number
+    ) -> Union["Distance", type(NotImplemented)]:
         return self * other
 
     def __truediv__(
@@ -67,7 +71,9 @@ class Distance:
                 raise ZeroDivisionError("division by zero")
             return Distance(round(self.km / other, 2))
         if isinstance(other, Distance):
-            raise TypeError("Division by Distance is not supported")
+            raise TypeError(
+                "Division by Distance is not supported"
+            )
         return NotImplemented
 
     def __rtruediv__(self, other: Number) -> type(NotImplemented):
