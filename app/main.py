@@ -1,6 +1,5 @@
 from typing import Union
 
-
 Number = Union[int, float]
 
 
@@ -11,64 +10,57 @@ class Distance:
         self.km: float = float(km)
 
     def __str__(self) -> str:
-        return f"Distance: {self.km} kilometers."
+        return f"Distance: {self.km} kilometers.\n"
 
     def __repr__(self) -> str:
         return f"Distance(km={self.km})"
 
     @staticmethod
-    def _get_km(
-        value: Union["Distance", Number]
-    ) -> Union[float, type(NotImplemented)]:
+    def _get_km(value: Union["Distance", Number]
+                ) -> Union[float, type(NotImplemented)]:
         if isinstance(value, Distance):
             return value.km
         if isinstance(value, (int, float)):
             return float(value)
         return NotImplemented
 
-    def __add__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __add__(self, other: Union["Distance", Number]
+               ) -> Union["Distance", type(NotImplemented)]:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return Distance(self.km + km)
 
-    def __radd__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __radd__(self, other: Union["Distance", Number]
+                ) -> Union["Distance", type(NotImplemented)]:
         return self + other
 
-    def __iadd__(
-        self, other: Union["Distance", Number]
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __iadd__(self, other: Union["Distance", Number]
+                ) -> Union["Distance", type(NotImplemented)]:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         self.km += km
         return self
 
-    def __mul__(
-        self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __mul__(self, other: Number
+               ) -> Union["Distance", type(NotImplemented)]:
         if isinstance(other, (int, float)):
             return Distance(self.km * other)
         if isinstance(other, Distance):
             raise TypeError("Multiplication by Distance is not supported")
         return NotImplemented
 
-    def __rmul__(
-        self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __rmul__(self, other: Number
+                ) -> Union["Distance", type(NotImplemented)]:
         return self * other
 
-    def __truediv__(
-        self, other: Number
-    ) -> Union["Distance", type(NotImplemented)]:
+    def __truediv__(self, other: Number
+                   ) -> Union["Distance", type(NotImplemented)]:
         if isinstance(other, (int, float)):
             if other == 0:
                 raise ZeroDivisionError("division by zero")
-            return Distance(self.km / other)
+            return Distance(round(self.km / other, 2))
         if isinstance(other, Distance):
             raise TypeError("Division by Distance is not supported")
         return NotImplemented
@@ -76,41 +68,31 @@ class Distance:
     def __rtruediv__(self, other: Number) -> type(NotImplemented):
         return NotImplemented
 
-    def __eq__(
-        self, other: Union["Distance", Number]
-    ) -> Union[bool, type(NotImplemented)]:
+    def __eq__(self, other: Union["Distance", Number]) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return self.km == km
 
-    def __lt__(
-        self, other: Union["Distance", Number]
-    ) -> Union[bool, type(NotImplemented)]:
+    def __lt__(self, other: Union["Distance", Number]) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return self.km < km
 
-    def __le__(
-        self, other: Union["Distance", Number]
-    ) -> Union[bool, type(NotImplemented)]:
+    def __le__(self, other: Union["Distance", Number]) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return self.km <= km
 
-    def __gt__(
-        self, other: Union["Distance", Number]
-    ) -> Union[bool, type(NotImplemented)]:
+    def __gt__(self, other: Union["Distance", Number]) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
         return self.km > km
 
-    def __ge__(
-        self, other: Union["Distance", Number]
-    ) -> Union[bool, type(NotImplemented)]:
+    def __ge__(self, other: Union["Distance", Number]) -> bool:
         km = self._get_km(other)
         if km is NotImplemented:
             return NotImplemented
